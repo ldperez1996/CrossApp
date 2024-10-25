@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "57194113617",
+    "project_id": "proyecto-d26db",
+    "storage_bucket": "proyecto-d26db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57194113617:android:696a291e7e09eb048ae670",
+        "android_client_info": {
+          "package_name": "com.example.crossplan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "57194113617-idd114613vo9me6hv8j89bvctje6vudo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmeiJNLg7sWE_OBsUEMeK9pYy78IexDCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "57194113617-76mrld58qik99qcus4cp0l9td10mhnn1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

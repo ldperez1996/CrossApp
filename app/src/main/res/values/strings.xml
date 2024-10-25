@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">CrossPlan</string>
+    <string name="login_title">Inicio de Sesión</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="username_or_email_hint">Usuario o Email</string>
+    <string name="password_hint">Contraseña</string>
+    <string name="login_button">Iniciar Sesión</string>
+    <string name="create_account_button">Crear Cuenta Nueva</string>
+    <string name="username_hint">Nombre de Usuario</string>
+    <string name="email_hint">Correo</string>
+    <string name="confirm_password_hint">Confirmar Contraseña</string>
+    <string name="register_button">Registrarse</string>
+    <string name="login_image_desc">Imagen de inicio de sesión</string>
+    <string name="register_image_desc">Imagen de registro</string>
+    <string name="default_web_client_id" translatable="false">57194113617-76mrld58qik99qcus4cp0l9td10mhnn1.apps.googleusercontent.com</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="title_history">Historial</string>
+    <string name="title_exercises">Ejercicios</string>
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.
+
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros[_{{{CITATION{{{_1{](https://github.com/KULeuven-Diepenbeek/appdev-course/tree/24b8024e617656f7fbb182fe4248ebcd11fa46d9/content%2Fextra%2Finstall.md)
+    </string>
+</resources>
