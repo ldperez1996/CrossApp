@@ -4,12 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@color/background_light_gray">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home Fragment"
         android:textSize="24sp"
-        android:textColor="#000000"/>
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+
+    <!-- Floating Action Button para cerrar sesión -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="Cerrar sesión"
+        android:src="@drawable/ic_logout"
+        android:layout_gravity="end|bottom"
+        app:backgroundTint="@color/colorPrimary" />
+
 </LinearLayout>
+

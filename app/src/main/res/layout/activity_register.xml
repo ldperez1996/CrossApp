@@ -4,8 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/white"
+    android:background="@color/background_light_gray"
     android:gravity="center_horizontal">
+
+    <!-- Título del formulario -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Añadir usuario"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginBottom="24dp" />
 
     <!-- Campo de usuario -->
     <EditText
@@ -76,5 +86,5 @@
         android:minHeight="48dp"
         android:padding="8dp"
         android:textColor="#FFFFFF"
-        android:backgroundTint="@color/colorPrimary" />
+        android:backgroundTint="@color/button_purple" />
 </LinearLayout>

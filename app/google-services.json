@@ -1,36 +1,36 @@
 {
   "project_info": {
-    "project_number": "57194113617",
-    "project_id": "proyecto-d26db",
-    "storage_bucket": "proyecto-d26db.appspot.com"
+    "project_number": "749520641707",
+    "firebase_url": "https://crossplan-daaa1-default-rtdb.firebaseio.com",
+    "project_id": "crossplan-daaa1",
+    "storage_bucket": "crossplan-daaa1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:57194113617:android:696a291e7e09eb048ae670",
+        "mobilesdk_app_id": "1:749520641707:android:bd61d577544ab1cbf5e1ee",
         "android_client_info": {
           "package_name": "com.example.crossplan"
         }
       },
       "oauth_client": [
         {
-          "client_id": "57194113617-idd114613vo9me6hv8j89bvctje6vudo.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "749520641707-emasqlkmtepuk2bpml4gou4otplm6gf8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.crossplan",
+            "certificate_hash": "fc08f5efbc1bdc75cd6485370dc61ff517be2e1f"
+          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAmeiJNLg7sWE_OBsUEMeK9pYy78IexDCA"
+          "current_key": "AIzaSyBPMadeqb6SH14u64ZPbSp-XUPPzvLvrUA"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "57194113617-76mrld58qik99qcus4cp0l9td10mhnn1.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

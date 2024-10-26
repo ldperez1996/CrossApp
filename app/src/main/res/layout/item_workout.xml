@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/background_light_gray">
 
     <TextView
         android:id="@+id/workoutName"
@@ -11,12 +12,12 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black" />
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/workoutDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:textColor="@android:color/darker_gray" />
+        android:textColor="@color/darker_gray" />
 </LinearLayout>

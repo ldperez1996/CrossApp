@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.crossplan.R
 import com.example.crossplan.models.Workout
 
-class HistoryAdapter(private val historyList: List<Workout>) :
+class HistoryAdapter(private val workoutHistoryList: List<Workout>) :
     RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
@@ -17,13 +17,13 @@ class HistoryAdapter(private val historyList: List<Workout>) :
     }
 
     override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        val currentWorkout = historyList[position]
+        val currentWorkout = workoutHistoryList[position]
         holder.workoutName.text = currentWorkout.name
         holder.workoutDescription.text = currentWorkout.description
     }
 
     override fun getItemCount(): Int {
-        return historyList.size
+        return workoutHistoryList.size
     }
 
     class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

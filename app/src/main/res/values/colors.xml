@@ -5,4 +5,7 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+    <color name="background_light_gray">#F5F5F5</color>
+    <color name="button_purple">#7B1FA2</color>
+    <color name="darker_gray">#333333</color>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crossplan.adapters.WorkoutAdapter
@@ -13,6 +14,10 @@ import com.example.crossplan.fragments.HistoryFragment
 import com.example.crossplan.fragments.HomeFragment
 import com.example.crossplan.models.Workout
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,10 +25,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var workoutRecyclerView: RecyclerView
     private lateinit var workoutAdapter: WorkoutAdapter
     private var workoutList: MutableList<Workout> = mutableListOf()
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        auth = FirebaseAuth.getInstance()
+        if (auth.currentUser == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
 
         createWorkoutButton = findViewById(R.id.createWorkoutButton)
         workoutRecyclerView = findViewById(R.id.workoutRecyclerView)
@@ -38,7 +52,6 @@ class MainActivity : AppCompatActivity() {
         workoutRecyclerView.layoutManager = LinearLayoutManager(this)
         workoutRecyclerView.adapter = workoutAdapter
 
-        // Manejar la navegación inferior
         bottomNavigationView.setOnItemSelectedListener { item ->
             var selectedFragment: Fragment? = null
             when (item.itemId) {
@@ -53,8 +66,32 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Establecer el fragmento inicial
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+        }
 
-        // Aquí deberías cargar los entrenos desde la base de datos y actualizar workoutList y workoutAdapter
+        // Cargar datos en un hilo separado
+        loadData()
+    }
+
+    private fun loadData() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            // Cargar datos aquí (simulación de carga de datos)
+            val fetchedWorkouts: MutableList<Workout> = fetchWorkoutsFromDatabase()
+
+            // Actualizar UI en el hilo principal
+            withContext(Dispatchers.Main) {
+                workoutList.addAll(fetchedWorkouts)
+                workoutAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun fetchWorkoutsFromDatabase(): MutableList<Workout> {
+        // Simulación de la carga de datos desde la base de datos
+        return mutableListOf(
+            Workout("1", "Workout 1", "Description 1"),
+            Workout("2", "Workout 2", "Description 2")
+        )
     }
 }

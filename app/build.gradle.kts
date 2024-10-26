@@ -21,6 +21,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -29,10 +30,29 @@ android {
         dataBinding = true
     }
 
+    signingConfigs {
+        maybeCreate("debug").apply {
+            storeFile = file("C:/Users/poison/.android/debug.keystore")
+            storePassword = "android"
+            keyAlias = "key0"
+            keyPassword = "android"
+        }
+        create("release") {
+            storeFile = file("C:/Users/poison/.android/debug.keystore")
+            storePassword = "android"
+            keyAlias = "key0"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
+        }
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 }
@@ -51,9 +71,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
 }
+
 apply(plugin = "com.google.gms.google-services")

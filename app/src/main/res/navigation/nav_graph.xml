@@ -2,17 +2,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_history">
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.crossplan.fragments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_history"
         android:name="com.example.crossplan.fragments.HistoryFragment"
-        android:label="@string/title_history"
+        android:label="Historial"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/navigation_exercises"
         android:name="com.example.crossplan.fragments.ExercisesFragment"
-        android:label="@string/title_exercises"
+        android:label="Ejercicios"
         tools:layout="@layout/fragment_exercises" />
 </navigation>

@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
 class RegisterActivity : AppCompatActivity() {
-
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +18,6 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         auth = FirebaseAuth.getInstance()
-
         val usernameEditText: EditText = findViewById(R.id.usernameEditText)
         val emailEditText: EditText = findViewById(R.id.emailEditText)
         val passwordEditText: EditText = findViewById(R.id.passwordEditText)
@@ -47,10 +45,7 @@ class RegisterActivity : AppCompatActivity() {
                                 userId?.let {
                                     database.child(it).setValue(userMap).addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
-                                            Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                                            val intent = Intent(this, MainActivity::class.java)
-                                            startActivity(intent)
-                                            finish()
+                                            showSuccessDialog()
                                         } else {
                                             Toast.makeText(this, "Error en el registro: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                                         }
@@ -67,5 +62,18 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun showSuccessDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Registro Exitoso")
+        builder.setMessage("El usuario ha sido creado exitosamente.")
+        builder.setPositiveButton("OK") { dialog, which ->
+            dialog.dismiss()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        builder.show()
     }
 }
