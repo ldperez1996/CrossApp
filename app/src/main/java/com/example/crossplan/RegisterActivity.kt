@@ -4,11 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import android.view.View
+
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -47,19 +49,19 @@ class RegisterActivity : AppCompatActivity() {
                                         if (task.isSuccessful) {
                                             showSuccessDialog()
                                         } else {
-                                            Toast.makeText(this, "Error en el registro: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                                            showSnackbar("Error en el registro: ${task.exception?.message}")
                                         }
                                     }
                                 }
                             } else {
-                                Toast.makeText(this, "Error en el registro: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                                showSnackbar("Error en el registro: ${task.exception?.message}")
                             }
                         }
                 } else {
-                    Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+                    showSnackbar("Las contraseñas no coinciden")
                 }
             } else {
-                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+                showSnackbar("Por favor completa todos los campos")
             }
         }
     }
@@ -75,5 +77,10 @@ class RegisterActivity : AppCompatActivity() {
             finish()
         }
         builder.show()
+    }
+
+    private fun showSnackbar(message: String) {
+        val rootView = findViewById<View>(android.R.id.content)
+        Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show()
     }
 }

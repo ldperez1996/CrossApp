@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.example.crossplan.models.Workout
+import android.view.View
+
 
 class CreateWorkoutActivity : AppCompatActivity() {
     private lateinit var workoutNameEditText: EditText
@@ -29,8 +30,8 @@ class CreateWorkoutActivity : AppCompatActivity() {
         createWorkoutButton.setOnClickListener {
             val workoutName = workoutNameEditText.text.toString()
             val workoutDescription = workoutDescriptionEditText.text.toString()
-
             Log.d("CreateWorkoutActivity", "Button clicked")
+
             if (workoutName.isNotEmpty() && workoutDescription.isNotEmpty()) {
                 val workoutId = database.push().key
                 if (workoutId != null) {
@@ -38,25 +39,30 @@ class CreateWorkoutActivity : AppCompatActivity() {
                     Log.d("CreateWorkoutActivity", "Workout object created: $workout")
                     database.child(workoutId).setValue(workout).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "Entreno creado exitosamente", Toast.LENGTH_SHORT).show()
+                            showSnackbar("Entreno creado exitosamente")
                             Log.d("CreateWorkoutActivity", "Workout saved successfully")
                             finish()
                         } else {
-                            Toast.makeText(this, "Error al crear entreno: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            showSnackbar("Error al crear entreno: ${task.exception?.message}")
                             Log.e("CreateWorkoutActivity", "Error: ${task.exception?.message}")
                         }
                     }.addOnFailureListener { exception ->
-                        Toast.makeText(this, "Error al crear entreno: ${exception.message}", Toast.LENGTH_SHORT).show()
+                        showSnackbar("Error al crear entreno: ${exception.message}")
                         Log.e("CreateWorkoutActivity", "Failure: ${exception.message}")
                     }
                 } else {
-                    Toast.makeText(this, "Error al generar ID de entreno", Toast.LENGTH_SHORT).show()
+                    showSnackbar("Error al generar ID de entreno")
                     Log.e("CreateWorkoutActivity", "Error al generar ID de entreno")
                 }
             } else {
-                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+                showSnackbar("Por favor completa todos los campos")
                 Log.w("CreateWorkoutActivity", "Campos vacíos")
             }
         }
+    }
+
+    private fun showSnackbar(message: String) {
+        val rootView = findViewById<View>(android.R.id.content)
+        Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show()
     }
 }

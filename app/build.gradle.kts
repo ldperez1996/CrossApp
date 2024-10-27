@@ -10,11 +10,13 @@ android {
 
     defaultConfig {
         applicationId = "com.example.crossplan"
-        minSdk = 21
+        minSdk = 23  // Cambiado de 21 a 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        vectorDrawables.useSupportLibrary = true
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     compileOptions {
@@ -37,7 +39,7 @@ android {
             keyAlias = "key0"
             keyPassword = "android"
         }
-        create("release") {
+        maybeCreate("release").apply {
             storeFile = file("C:/Users/poison/.android/debug.keystore")
             storePassword = "android"
             keyAlias = "key0"
@@ -58,10 +60,10 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:30.3.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-database-ktx")
-    implementation("com.google.android.gms:play-services-auth:19.2.0")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("com.google.android.material:material:1.5.0")

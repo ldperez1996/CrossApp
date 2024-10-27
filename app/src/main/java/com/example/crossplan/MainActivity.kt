@@ -14,13 +14,15 @@ import com.example.crossplan.fragments.HistoryFragment
 import com.example.crossplan.fragments.HomeFragment
 import com.example.crossplan.models.Workout
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import android.view.View
+
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var createWorkoutButton: Button
     private lateinit var workoutRecyclerView: RecyclerView
     private lateinit var workoutAdapter: WorkoutAdapter
@@ -78,11 +80,11 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             // Cargar datos aquí (simulación de carga de datos)
             val fetchedWorkouts: MutableList<Workout> = fetchWorkoutsFromDatabase()
-
             // Actualizar UI en el hilo principal
             withContext(Dispatchers.Main) {
                 workoutList.addAll(fetchedWorkouts)
                 workoutAdapter.notifyDataSetChanged()
+                showSnackbar("Datos de entreno cargados")
             }
         }
     }
@@ -93,5 +95,10 @@ class MainActivity : AppCompatActivity() {
             Workout("1", "Workout 1", "Description 1"),
             Workout("2", "Workout 2", "Description 2")
         )
+    }
+
+    private fun showSnackbar(message: String) {
+        val rootView = findViewById<View>(android.R.id.content)
+        Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show()
     }
 }

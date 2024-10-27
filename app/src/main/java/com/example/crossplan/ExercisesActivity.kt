@@ -6,14 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crossplan.adapters.ExerciseAdapter
 import com.example.crossplan.models.Exercise
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.*
+import android.view.View
+
 
 class ExercisesActivity : AppCompatActivity() {
-
     private lateinit var exerciseRecyclerView: RecyclerView
     private lateinit var exerciseAdapter: ExerciseAdapter
     private var exerciseList: MutableList<Exercise> = mutableListOf()
@@ -27,7 +25,6 @@ class ExercisesActivity : AppCompatActivity() {
         exerciseAdapter = ExerciseAdapter(exerciseList)
         exerciseRecyclerView.layoutManager = LinearLayoutManager(this)
         exerciseRecyclerView.adapter = exerciseAdapter
-
         database = FirebaseDatabase.getInstance().reference.child("exercises")
 
         // Cargar los datos desde Firebase
@@ -41,11 +38,17 @@ class ExercisesActivity : AppCompatActivity() {
                     }
                 }
                 exerciseAdapter.notifyDataSetChanged()
+                showSnackbar("Datos de ejercicios cargados")
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // Manejar el error
+                showSnackbar("Error al cargar datos: ${error.message}")
             }
         })
+    }
+
+    private fun showSnackbar(message: String) {
+        val rootView = findViewById<View>(android.R.id.content)
+        Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show()
     }
 }

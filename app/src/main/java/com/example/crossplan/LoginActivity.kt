@@ -4,12 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -19,7 +20,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 
 class LoginActivity : AppCompatActivity() {
-
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -31,8 +31,10 @@ class LoginActivity : AppCompatActivity() {
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 Log.w("LoginActivity", "Google sign in failed", e)
-                Toast.makeText(this, "Error al iniciar sesión con Google", Toast.LENGTH_SHORT).show()
+                showSnackbar("Error al iniciar sesión con Google")
             }
+        } else {
+            showSnackbar("Google Sign-In cancelled or failed")
         }
     }
 
@@ -52,12 +54,10 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_auth)
 
         auth = FirebaseAuth.getInstance()
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         val emailEditText: EditText = findViewById(R.id.emailEditText)
@@ -78,11 +78,11 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         } else {
-                            Toast.makeText(this, "Error al iniciar sesión: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            showSnackbar("Error al iniciar sesión: ${task.exception?.message}")
                         }
                     }
             } else {
-                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+                showSnackbar("Por favor completa todos los campos")
             }
         }
 
@@ -103,13 +103,13 @@ class LoginActivity : AppCompatActivity() {
                 auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "Correo de recuperación enviado", Toast.LENGTH_SHORT).show()
+                            showSnackbar("Correo de recuperación enviado")
                         } else {
-                            Toast.makeText(this, "Error al enviar correo de recuperación: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            showSnackbar("Error al enviar correo de recuperación: ${task.exception?.message}")
                         }
                     }
             } else {
-                Toast.makeText(this, "Por favor ingresa tu correo electrónico", Toast.LENGTH_SHORT).show()
+                showSnackbar("Por favor ingresa tu correo electrónico")
             }
         }
     }
@@ -141,13 +141,18 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 finish()
                             } else {
-                                Toast.makeText(this, "Error al registrar usuario: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                                showSnackbar("Error al registrar usuario: ${task.exception?.message}")
                             }
                         }
                     }
                 } else {
-                    Toast.makeText(this, "Error al autenticar con Firebase: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    showSnackbar("Error al autenticar con Firebase: ${task.exception?.message}")
                 }
             }
+    }
+
+    private fun showSnackbar(message: String) {
+        val rootView = findViewById<View>(android.R.id.content)
+        Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show()
     }
 }
